@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import localFont from "next/font/local";
 import gsap from "gsap";
-
-const metropolis = localFont({
-  src: "../styles/metropolis/METROPOLIS.woff2",
-  variable: "--font-metropolis",
-});
+import Image from "next/image";
 
 const calming = localFont({
   src: "../styles/calming/Calming-Regular.woff2",
@@ -29,7 +25,7 @@ const Associations = () => {
   let currentIndex = 1;
   let totalSlides = 7;
 
-  const updateActiveSlide = () => {
+  const updateActiveSlide = useCallback(() => {
     document.querySelectorAll(".title").forEach((el, index) => {
       if (index === currentIndex) {
         el.classList.add("active");
@@ -37,33 +33,11 @@ const Associations = () => {
         el.classList.remove("active");
       }
     });
-  };
+  }, [currentIndex]);
 
-  const handleSlider = () => {
-    if (currentIndex < totalSlides) {
-      currentIndex++;
-    } else {
-      currentIndex = 1;
-    }
-
-    gsap.to(".slide-titles", {
-      onStart: () => {
-        setTimeout(() => {
-          updateActiveSlide();
-        }, 100);
-        updateImages(currentIndex + 1);
-      },
-      x: `-${(currentIndex - 1) * 11.1111}%`,
-      duration: 2,
-      ease: "power4.out",
-    });
-  };
-
-  const updateImages = (imgNumber) => {
-    // Use correct image paths in public directory
+  const updateImages = useCallback((imgNumber) => {
     const imgSrc = `/final-images/associations/${imgNumber}.jpg`;
 
-    // Create new image elements
     const imgTop = document.createElement("img");
     const imgBottom = document.createElement("img");
 
@@ -91,7 +65,27 @@ const Associations = () => {
       stagger: 0.15,
       onComplete: trimExcessImages,
     });
-  };
+  }, []);
+
+  const handleSlider = useCallback(() => {
+    if (currentIndex < totalSlides) {
+      currentIndex++;
+    } else {
+      currentIndex = 1;
+    }
+
+    gsap.to(".slide-titles", {
+      onStart: () => {
+        setTimeout(() => {
+          updateActiveSlide();
+        }, 100);
+        updateImages(currentIndex + 1);
+      },
+      x: `-${(currentIndex - 1) * 11.1111}%`,
+      duration: 2,
+      ease: "power4.out",
+    });
+  }, [currentIndex, totalSlides, updateActiveSlide, updateImages]);
 
   const trimExcessImages = () => {
     const selectors = [".img-top", ".img-bottom"];
@@ -110,24 +104,21 @@ const Associations = () => {
     });
   };
 
-  // Ensure to call the function with a correct image number
   useEffect(() => {
     const handleClick = () => {
       handleSlider();
     };
 
-    // Add images on initial load
     updateImages(2);
     updateActiveSlide();
 
-    // Use precise element for adding event listener
     const sliderElement = document.querySelector(".slider");
     sliderElement.addEventListener("click", handleClick);
 
     return () => {
       sliderElement.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [handleSlider, updateActiveSlide, updateImages]);
 
   return (
     <div className={`slider ${calming.className} w-screen h-screen relative `}>
