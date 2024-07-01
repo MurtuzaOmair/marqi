@@ -4,7 +4,7 @@ import heroVideo from "@/videos/11.webm";
 const Vid = () => {
   return (
     <div className="w-full h-screen flex items-center justify-center">
-      <video
+      {/* <video
         width={2000}
         height={2000}
         style={{ width: "100vw", height: "500px", objectFit: "cover" }}
@@ -21,6 +21,17 @@ const Vid = () => {
         style={{ width: "100vw", height: "500px", objectFit: "cover" }}
       >
         <source src="/final-images/11.webm" type="video/webm" />
+      </video> */}
+      <video
+        controls
+        width="640"
+        height="360"
+        // autoPlay
+        // loop
+        className="rounded-lg shadow-lg"
+      >
+        <source src="/final-images/13.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
       {/* <Video src={heroVideo} /> */}
     </div>
