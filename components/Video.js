@@ -41,7 +41,7 @@ const Video = () => {
   }, []);
 
   return (
-    <div className=" w-full h-screen flex items-center justify-center ">
+    <div className="w-full h-screen flex items-center justify-center">
       <video
         className="w-full h-full object-cover brightness-[0.9]"
         autoPlay
@@ -50,6 +50,7 @@ const Video = () => {
         preload="auto"
       >
         <source src="/final-images/main/11.webm" type="video/webm" />
+        <source src="/final-images/main/11.mp4" type="video/mp4" />
         {/* Add additional source tags for different formats if needed */}
         Your browser does not support the video tag.
       </video>
