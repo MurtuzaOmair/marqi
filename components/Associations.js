@@ -1,0 +1,154 @@
+import React, { useEffect, useState } from "react";
+import localFont from "next/font/local";
+import gsap from "gsap";
+
+const metropolis = localFont({
+  src: "../styles/metropolis/METROPOLIS.woff2",
+  variable: "--font-metropolis",
+});
+
+const calming = localFont({
+  src: "../styles/calming/Calming-Regular.woff2",
+  variable: "--font-calming",
+});
+
+// Array of slide data
+const slides = [
+  { title: "Amazon", imgSrc: "1.jpg" },
+  { title: "Microsoft", imgSrc: "2.jpg" },
+  { title: "Google", imgSrc: "3.jpg" },
+  { title: "Phoenix", imgSrc: "4.jpg" },
+  { title: "MEIL", imgSrc: "5.jpg" },
+  { title: "Hotel Avasa", imgSrc: "6.jpg" },
+  { title: "Lemon Tree", imgSrc: "7.jpg" },
+  { title: "Amazon", imgSrc: "1.jpg" },
+  { title: "Microsoft", imgSrc: "2.jpg" },
+];
+
+const Associations = () => {
+  let currentIndex = 1;
+  let totalSlides = 7;
+
+  const updateActiveSlide = () => {
+    document.querySelectorAll(".title").forEach((el, index) => {
+      if (index === currentIndex) {
+        el.classList.add("active");
+      } else {
+        el.classList.remove("active");
+      }
+    });
+  };
+
+  const handleSlider = () => {
+    if (currentIndex < totalSlides) {
+      currentIndex++;
+    } else {
+      currentIndex = 1;
+    }
+
+    gsap.to(".slide-titles", {
+      onStart: () => {
+        setTimeout(() => {
+          updateActiveSlide();
+        }, 100);
+        updateImages(currentIndex + 1);
+      },
+      x: `-${(currentIndex - 1) * 11.1111}%`,
+      duration: 2,
+      ease: "power4.out",
+    });
+  };
+
+  const updateImages = (imgNumber) => {
+    // Use correct image paths in public directory
+    const imgSrc = `/final-images/associations/${imgNumber}.jpg`;
+
+    // Create new image elements
+    const imgTop = document.createElement("img");
+    const imgBottom = document.createElement("img");
+
+    // Set image sources
+    imgTop.src = imgSrc;
+    imgBottom.src = imgSrc;
+
+    // Set initial styles
+    imgTop.style.clipPath = "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
+    imgBottom.style.clipPath =
+      "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
+    imgTop.style.transform = "scale(2)";
+    imgBottom.style.transform = "scale(2)";
+
+    // Append images to their containers
+    document.querySelector(".img-top").appendChild(imgTop);
+    document.querySelector(".img-bottom").appendChild(imgBottom);
+
+    // Apply GSAP animations
+    gsap.to([imgTop, imgBottom], {
+      clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
+      transform: "scale(1)",
+      duration: 2,
+      ease: "power4.out",
+      stagger: 0.15,
+      onComplete: trimExcessImages,
+    });
+  };
+
+  const trimExcessImages = () => {
+    const selectors = [".img-top", ".img-bottom"];
+
+    selectors.forEach((selector) => {
+      const container = document.querySelector(selector);
+
+      const images = Array.from(container.querySelectorAll("img"));
+      const excessCount = images.length - 5;
+
+      if (excessCount > 0) {
+        images
+          .slice(0, excessCount)
+          .forEach((image) => container.removeChild(image));
+      }
+    });
+  };
+
+  // Ensure to call the function with a correct image number
+  useEffect(() => {
+    const handleClick = () => {
+      handleSlider();
+    };
+
+    // Add images on initial load
+    updateImages(2);
+    updateActiveSlide();
+
+    // Use precise element for adding event listener
+    const sliderElement = document.querySelector(".slider");
+    sliderElement.addEventListener("click", handleClick);
+
+    return () => {
+      sliderElement.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  return (
+    <div className={`slider ${calming.className} w-screen h-screen relative `}>
+      <div className="slide-titles absolute top-0 left-0 w-[300vw] h-screen flex pointer-events-none z-[2] ">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className="title flex-1 w-full h-full flex items-center justify-center"
+          >
+            <h1 className=" text-center text-[min(7.825vw,25px)]  md:text-[min(2.075vw,30px)] font-normal text-white/20 opacity-0 md:opacity-100 transition-color-opacity duration-25 ease ">
+              {slide.title}
+            </h1>
+          </div>
+        ))}
+      </div>
+      <div className="slide-images w-full md:w-[min(34.725vw,600px)] h-full md:h-[min(27.775vw,350px)] absolute top-1/2 left-1/2 opacity-75 z-[1] ">
+        <div className="img-top w-full h-full absolute  "></div>
+        <div className="img-bottom w-full h-full absolute  "></div>
+      </div>
+    </div>
+  );
+};
+
+export default Associations;
