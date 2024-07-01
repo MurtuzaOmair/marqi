@@ -10,10 +10,10 @@ import ModularKitchen from "/public/categories/modularKitchens.jpg";
 import Wardrobe from "/public/jpg/50.jpg";
 import Sanitaryware from "/public/categories/Sanitaryware.png";
 import Fitting from "/public/jpg/9.webp";
-import Tile from "/public/categories/Tiles.jpg";
+import Tile from "/public/categories/tiles.jpg";
 import Mosaic from "/public/categories/Mosaic.jpg";
 import WoodenFlooring from "/public/categories/woodenflooring.jpg";
-import Wallpaper from "/public/categories/Wallpapers.jpg";
+import Wallpaper from "/public/categories/wallpapers.jpg";
 import useParallax from "@/hooks/Parallax";
 import useLineByLine from "@/hooks/LineByLine";
 
