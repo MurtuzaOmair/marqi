@@ -47,8 +47,9 @@ const Video = () => {
         autoPlay
         muted
         loop
+        preload="auto"
       >
-        <source src="/HeroVideos(webm)/11.webm" type="video/webm" />
+        <source src="/final-images/main/11.webm" type="video/webm" />
         {/* Add additional source tags for different formats if needed */}
         Your browser does not support the video tag.
       </video>

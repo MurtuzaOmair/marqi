@@ -53,11 +53,11 @@ const OurProjects = () => {
               design is evident in the intricate craftsmanship of our villas,
               each a testament to our passion.
             </div>
-            <button class="group relative w-fit overflow-hidden overflow-x-hidden  bg-transparent border-[#51375b] border px-[1em] py-[0.5em] sm2:px-[0.85em] sm2:py-[0.4em] text-[2.85vw] lg:text-[1.25vw] text-[#51375b] hover:text-[#fcf3ff] ">
+            <button className="group relative w-fit overflow-hidden overflow-x-hidden  bg-transparent border-[#51375b] border px-[1em] py-[0.5em] sm2:px-[0.85em] sm2:py-[0.4em] text-[2.85vw] lg:text-[1.25vw] text-[#51375b] hover:text-[#fcf3ff] ">
               <Link href={"/projects/coral-gables"}>
-                <span class="relative z-10">Learn More</span>
-                <span class="absolute inset-0 overflow-hidden ">
-                  <span class="absolute left-0 aspect-square w-full origin-center -translate-x-full rounded-full bg-[#3f2b47]  transition-all duration-500 group-hover:-translate-x-0 group-hover:scale-150"></span>
+                <span className="relative z-10">Learn More</span>
+                <span className="absolute inset-0 overflow-hidden ">
+                  <span className="absolute left-0 aspect-square w-full origin-center -translate-x-full rounded-full bg-[#3f2b47]  transition-all duration-500 group-hover:-translate-x-0 group-hover:scale-150"></span>
                 </span>
               </Link>
             </button>

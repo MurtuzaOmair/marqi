@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import localFont from "next/font/local";
 import Link from "next/link";
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -110,7 +110,7 @@ const Footer = () => {
   const footerContent = useRef(null);
 
   const useGSAPAnimation = (ref, triggerOptions = {}) => {
-    useLayoutEffect(() => {
+    useEffect(() => {
       if (!ref.current) return;
 
       const tl = gsap.timeline({
