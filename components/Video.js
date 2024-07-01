@@ -49,8 +49,8 @@ const Video = () => {
         loop
         preload="auto"
       >
-        <source src="/final-images/main/11.webm" type="video/webm" />
-        <source src="/final-images/main/11.mp4" type="video/mp4" />
+        <source src="/final-images/11.webm" type="video/webm" />
+        <source src="/final-images/11.mp4" type="video/mp4" />
         {/* Add additional source tags for different formats if needed */}
         Your browser does not support the video tag.
       </video>
