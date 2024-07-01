@@ -7,7 +7,7 @@ const Vid = () => {
       <video
         width={2000}
         height={2000}
-        className="w-full h-full object-cover brightness-[0.9]  "
+        style={{ width: "100vw", height: "500px", objectFit: "cover" }}
         autoPlay
         muted
         loop
@@ -15,7 +15,13 @@ const Vid = () => {
         <source src="/final-images/11.webm" type="video/webm" />
         Your browser does not support the video tag.
       </video>
-
+      <video
+        autoPlay
+        loop
+        style={{ width: "100vw", height: "500px", objectFit: "cover" }}
+      >
+        <source src="/final-images/11.webm" type="video/webm" />
+      </video>
       {/* <Video src={heroVideo} /> */}
     </div>
   );
