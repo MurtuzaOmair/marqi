@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import localFont from "next/font/local";
-
-import Hero1 from "../public/hero/hero.webp";
 import { gsap } from "gsap";
 import { useInView } from "react-intersection-observer";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
