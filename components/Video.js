@@ -5,7 +5,9 @@ const Vid = () => {
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <video
-        className="w-full h-full object-cover brightness-[0.9] z-[1000000000000000] "
+        width={2000}
+        height={2000}
+        className="w-full h-full object-cover brightness-[0.9]  "
         autoPlay
         muted
         loop
