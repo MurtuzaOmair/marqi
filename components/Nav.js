@@ -113,7 +113,7 @@ const Nav = () => {
         color: `${
           nav
             ? "#51375b"
-            : ("#FCF3FF" && router.asPath === "/") ||
+            : router.asPath === "/" ||
               router.asPath === "/contact" ||
               router.asPath === "/projects/associations"
             ? "#fcf3ff"
@@ -123,7 +123,7 @@ const Nav = () => {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: document.body, // Set the trigger to body
+          trigger: document.body,
           start: "top+=200",
           end: "+=1",
           toggleActions: "play none none reverse",
@@ -132,11 +132,11 @@ const Nav = () => {
       });
 
       tl.to(".nav-bg", { opacity: 1 })
-        .to(".desktop-nav-text", { color: `#51375b` })
+        .to(".desktop-nav-text", { color: "#51375b" })
         .to(associate.current, { color: "#51375b" }, "<")
         .to(svg.current, { yPercent: 0, rotate: 0 }, "<")
         .to(desktopNav.current, { x: -35 }, "<")
-        .to(".hamburger-color-onAnimation", { color: `#51375b` });
+        .to(".hamburger-color-onAnimation", { color: "#51375b" });
     };
 
     loadGSAP();
@@ -147,11 +147,14 @@ const Nav = () => {
       <div className="relative w-full flex items-center justify-between font-medium bg-transparent">
         {/* Marqi Logo */}
         <div className="pl-[1%] py-[2%] transition-all duration-500 z-[4] md:py-[0.5%] flex justify-center items-center gap-[0.8vw]">
-          <Link href="/" className="hover:cursor-pointer">
+          <Link rel="preload" href="/" className="cursor-pointer">
             <Image
               src={logo}
               alt="Marqi Logo"
-              className="transition duration-500 ease-out h-[7.25vw] sm2:h-[5vw] md:h-[3.35vw] w-full cursor-pointer"
+              priority
+              width={278} // Add appropriate width and height based on your image
+              height={256} // Add appropriate width and height based on your image
+              className="h-[7.25vw] sm2:h-[5vw] md:h-[3.35vw] w-full"
             />
           </Link>
           <div className="duration-500 ease-out hidden md:flex flex-col item-center justify-center">
