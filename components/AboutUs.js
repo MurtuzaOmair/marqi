@@ -34,11 +34,11 @@ const AboutUs = () => {
       <div className="  w-[95%] sm2:w-[90%] lg:w-[85%] flex items-center justify-between flex-col  lg:flex-row gap-[4vw] lg:gap-0 ">
         <div className=" w-full lg:w-[45%] h-[60vh]  lg:h-[80vh] ">
           <Image
+            layout="responsive"
             src={"/final-media/main/about/1.jpg"}
             className="w-full object-cover h-full brightness-[0.85] "
             width={1000}
             height={1000}
-            priority={true}
             alt="about"
           />
         </div>
