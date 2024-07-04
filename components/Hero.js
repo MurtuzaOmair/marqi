@@ -74,14 +74,14 @@ const Hero = () => {
   }, []);
 
   const images = [
-    "/jpg/92.webp",
-    "/jpg/3.jpg",
-    "/jpg/12.jpg",
-    "/jpg/Slideshow5.jpg",
-    "/jpg/14.jpg",
-    "/jpg/22.jpg",
-    "/jpg/Slideshow4.jpg",
-    "/jpg/90.webp",
+    "/final-media/main/hero/1.webp",
+    "/final-media/main/hero/2.webp",
+    "/final-media/main/hero/3.webp",
+    "/final-media/main/hero/4.webp",
+    "/final-media/main/hero/5.webp",
+    "/final-media/main/hero/6.webp",
+    "/final-media/main/hero/7.webp",
+    "/final-media/main/hero/8.webp",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -124,7 +124,7 @@ const Hero = () => {
             <Image
               src={image}
               alt={`Image ${index + 1}`}
-              className="object-cover w-full h-full brightness-[0.75]"
+              className="object-cover w-full h-full brightness-[0.85]"
               fill={true}
             />
           </div>

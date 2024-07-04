@@ -50,7 +50,7 @@ const Associations = () => {
 
   const updateImages = useCallback(
     (imgNumber) => {
-      const imgSrc = `/final-images/associations/${imgNumber}.jpg`;
+      const imgSrc = `/final-media/associations/${imgNumber}.jpg`;
       const imgTop = document.createElement("img");
       const imgBottom = document.createElement("img");
 

@@ -54,7 +54,7 @@ const OurProjects = () => {
               each a testament to our passion.
             </div>
             <button className="group relative w-fit overflow-hidden overflow-x-hidden  bg-transparent border-[#51375b] border px-[1em] py-[0.5em] sm2:px-[0.85em] sm2:py-[0.4em] text-[2.85vw] lg:text-[1.25vw] text-[#51375b] hover:text-[#fcf3ff] ">
-              <Link href={"/projects/coral-gables"}>
+              <Link href={"/final-media/main/ourProjects/2.webp"}>
                 <span className="relative z-10">Learn More</span>
                 <span className="absolute inset-0 overflow-hidden ">
                   <span className="absolute left-0 aspect-square w-full origin-center -translate-x-full rounded-full bg-[#3f2b47]  transition-all duration-500 group-hover:-translate-x-0 group-hover:scale-150"></span>
@@ -79,22 +79,3 @@ const OurProjects = () => {
 };
 
 export default OurProjects;
-
-// useEffect(() => {
-//   const splitTypes = document.querySelectorAll(".reveal-type");
-//   splitTypes.forEach((char, i) => {
-//     const text = new SplitType(char, { types: "chars" });
-//     gsap.from(text.chars, {
-//       scrollTrigger: {
-//         trigger: char,
-//         start: "top 80%",
-//         end: "top 20%",
-//         scrub: true,
-//         markers: false,
-//       },
-//       opacity: 0.4,
-//       stagger: 0.1,
-//       ease: "Expo.easeOut",
-//     });
-//   });
-// }, []);

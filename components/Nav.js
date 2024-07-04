@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import localFont from "next/font/local";
 import Image from "next/image";
-import logo from "/public/marqi2.png";
+import logo from "/public/final-media/main/nav/marqi2.png";
 import { useRouter } from "next/router";
 
 // Local font imports

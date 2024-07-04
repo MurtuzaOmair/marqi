@@ -1,12 +1,12 @@
 "use client";
 // import { gsap } from "gsap";
-import Picture1 from "/public/jpg/60.jpg";
-import Picture2 from "/public/jpg/37.jpg";
-import Picture3 from "/public/jpg/32.jpg";
-import Picture4 from "/public/jpg/38.jpg";
-import Picture5 from "/public/jpg/21.jpg";
-import Picture6 from "/public/jpg/46.jpg";
-import React, { useEffect, useRef } from "react";
+import Picture1 from "/public/final-media/main/gallery/6.jpg";
+import Picture2 from "/public/final-media/main/gallery/3.jpg";
+import Picture3 from "/public/final-media/main/gallery/2.jpg";
+import Picture4 from "/public/final-media/main/gallery/4.jpg";
+import Picture5 from "/public/final-media/main/gallery/1.jpg";
+import Picture6 from "/public/final-media/main/gallery/5.jpg";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { useScroll, useTransform, motion } from "framer-motion";
 
@@ -77,7 +77,7 @@ const Gallery = () => {
             >
               <div className={`imageContainer relative ${className} `}>
                 <Image
-                  className=" object-cover brightness-[.85] "
+                  className=" object-cover brightness-[.75] "
                   src={src}
                   fill
                   alt="image"

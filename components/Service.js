@@ -23,28 +23,28 @@ const Service = () => {
     {
       titleOne: "Proprietà",
       titleTwo: "Property",
-      src: "services/property.jpg",
+      src: "final-media/main/services/property.jpg",
       phrase: "Crafting your haven, brick by dream.",
       border: border1Ref,
     },
     {
       titleOne: "Costruzione",
       titleTwo: "Construction",
-      src: "services/construction.jpg",
+      src: "final-media/main/services/construction.jpg",
       phrase: "The art of shaping your world.",
       border: border2Ref,
     },
     {
       titleOne: "Disegni",
       titleTwo: "Design",
-      src: "services/design.png",
+      src: "final-media/main/services/design.png",
       phrase: "Curating experiences, one detail at a time.",
       border: border3Ref,
     },
     {
       titleOne: "Esportare",
       titleTwo: "Export",
-      src: "services/exports.jpg",
+      src: "final-media/main/services/exports.jpg",
       phrase: "Bridging borders, building opportunities.",
       border: border4Ref,
     },
@@ -140,76 +140,3 @@ const Service = () => {
 };
 
 export default Service;
-
-// const sectionRefs = useRef([]);
-// const borderRefs = useRef([]);
-// // Add as many sections as needed here
-// const section1Ref = useRef(null);
-// const section2Ref = useRef(null);
-// const section3Ref = useRef(null);
-// const section4Ref = useRef(null);
-// const section5Ref = useRef(null);
-// const section6Ref = useRef(null);
-// const border2Ref = useRef(null);
-// const border1Ref = useRef(null);
-// const border3Ref = useRef(null);
-// const border4Ref = useRef(null);
-// const border5Ref = useRef(null);
-
-// useEffect(() => {
-// sectionRefs.current = [
-//   section1Ref.current,
-//   section2Ref.current,
-//   section3Ref.current,
-//   section4Ref.current,
-//   section5Ref.current,
-//   section6Ref.current,
-// ];
-
-// borderRefs.current = [
-//   border1Ref.current,
-//   border2Ref.current,
-//   border3Ref.current,
-//   border4Ref.current,
-//   border5Ref.current,
-// ];
-
-// sectionRefs.current.forEach((ref) => {
-//   gsap.fromTo(
-//     ref,
-//     {
-//       y: 20,
-//       opacity: 0,
-//     },
-//     {
-//       y: 0,
-//       opacity: 1,
-//       duration: 2.75,
-//       delay: 0.35,
-//       ease: "Expo.easeOut",
-//       scrollTrigger: {
-//         trigger: ref,
-//       },
-//       stagger: 0.75,
-//     }
-//   );
-// });
-
-// borderRefs.current.forEach((ref) => {
-//   gsap.fromTo(
-//     ref,
-//     {
-//       width: 0,
-//     },
-//     {
-//       width: "100%",
-//       duration: 2.75,
-//       delay: 0.35,
-//       stagger: 0.75,
-//       ease: "Expo.easeOut",
-//       scrollTrigger: {
-//         trigger: ref,
-//       },
-//     }
-//   );
-// });
