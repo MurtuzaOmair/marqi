@@ -3,17 +3,17 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
 
-import NaturalStone from "/public/categories/stone.jpg";
-import DecorativePanel from "/public/categories/decorativePanel.jpg";
-import Furniture from "/public/categories/furniture.jpg";
-import ModularKitchen from "/public/categories/modularKitchens.jpg";
-import Wardrobe from "/public/jpg/50.jpg";
-import Sanitaryware from "/public/categories/Sanitaryware.png";
-import Fitting from "/public/jpg/9.webp";
-import Tile from "/public/categories/tiles.jpg";
-import Mosaic from "/public/categories/Mosaic.jpg";
-import WoodenFlooring from "/public/categories/woodenflooring.jpg";
-import Wallpaper from "/public/categories/wallpapers.jpg";
+import NaturalStone from "/public/final-media/repertoires/categoriesSection/1.jpg";
+import DecorativePanel from "/public/final-media/repertoires/categoriesSection/2.jpg";
+import Furniture from "/public/final-media/repertoires/categoriesSection/3.jpg";
+import ModularKitchen from "/public/final-media/repertoires/categoriesSection/4.jpg";
+import Wardrobe from "/public/final-media/repertoires/categoriesSection/5.jpg";
+import Sanitaryware from "/public/final-media/repertoires/categoriesSection/6.png";
+import Fitting from "/public/final-media/repertoires/categoriesSection/7.webp";
+import Tile from "/public/final-media/repertoires/categoriesSection/8.jpg";
+import Mosaic from "/public/final-media/repertoires/categoriesSection/9.jpg";
+import WoodenFlooring from "/public/final-media/repertoires/categoriesSection/10.jpg";
+import Wallpaper from "/public/final-media/repertoires/categoriesSection/11.jpg";
 import useParallax from "@/hooks/Parallax";
 import useLineByLine from "@/hooks/LineByLine";
 
@@ -103,12 +103,6 @@ const SingleSection = React.memo(({ img, title, desc, index }) => {
       },
     });
 
-    // const xValue = index % 2 === 0 ? -15 : 15;
-    // const clipPathValue =
-    //   index % 2 === 0
-    //     ? "polygon(0 0, 0 0, 0 100%, 0% 100%)"
-    //     : "polygon(80% 0, 100% 0, 100% 100%, 80% 100%)";
-
     timeline
       .fromTo(
         imageParent,
@@ -121,22 +115,6 @@ const SingleSection = React.memo(({ img, title, desc, index }) => {
         { scale: 1, opacity: 1, duration: 1.75, ease: "Expo.easeOut" },
         "<"
       )
-      // .fromTo(
-      //   image,
-      //   {
-      //     x: xValue,
-      //     opacity: 0,
-      //     // clipPath: clipPathValue,
-      //   },
-      //   {
-      //     x: 0,
-      //     opacity: 1,
-      //     // clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0% 100%)",
-      //     duration: 1.75,
-      //     ease: "power2.out",
-      //   },
-      //   "<"
-      // )
       .fromTo(
         borderRight,
         { height: "0" },

@@ -1,8 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import localFont from "next/font/local";
 import Image from "next/image";
-import HeroRepertoire from "/public/webp/coral/2.jpg";
-import HeroRepertoire2 from "/public/webp/coral/23.webp";
+import HeroRepertoire from "/public/final-media/coral-gables/projectHero/1.jpg";
+import HeroRepertoire2 from "/public/final-media/coral-gables/projectHero/2.webp";
 import gsap from "gsap";
 import useParallax from "@/hooks/Parallax";
 import useLineByLine from "@/hooks/LineByLine";

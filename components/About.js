@@ -4,8 +4,6 @@ import {
   forwardRef,
   useEffect,
   useState,
-  useMemo,
-  useCallback,
 } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
@@ -14,8 +12,8 @@ import SplitType from "split-type";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import dynamic from "next/dynamic";
 import { debounce } from "lodash";
-import founder1Image from "../public/jpg/aman.jpg";
-import founder2Image from "../public/jpg/mrinal.jpg";
+import founder1Image from "../public/final-media/about/1.jpg";
+import founder2Image from "../public/final-media/about/2.jpg";
 import useLineByLine from "@/hooks/LineByLine";
 
 const TypewriterGSAP = dynamic(
@@ -250,65 +248,6 @@ const useGSAPAnimation = (ref, triggerOptions = {}) => {
   }, [ref, triggerOptions]);
 };
 
-// const useGSAPAnimation = (ref, triggerOptions = {}) => {
-//   useEffect(() => {
-//     if (!ref.current) return;
-
-//     const textElements = Array.from(
-//       ref.current.querySelectorAll("p, span, h1, h2, h3, h4, h5, h6")
-//     );
-//     const allChildren = Array.from(ref.current.children);
-//     const otherElements = allChildren.filter(
-//       (child) => !textElements.includes(child)
-//     );
-
-//     // Line-by-line animation for text elements
-//     textElements.forEach((element) => {
-//       const splitDesc = new SplitType(element, { types: "lines" });
-//       gsap.fromTo(
-//         splitDesc.lines,
-//         { opacity: 0, y: 20 },
-//         {
-//           opacity: 1,
-//           y: 0,
-//           stagger: 0.125,
-//           duration: 1,
-//           scrollTrigger: {
-//             trigger: element,
-//             start: "top 70%",
-//             end: "bottom 30%",
-//           },
-//         }
-//       );
-//     });
-
-//     // Normal opacity and y animation for other elements
-//     gsap.fromTo(
-//       otherElements,
-//       { opacity: 0, y: 20 },
-//       {
-//         opacity: 1,
-//         y: 0,
-//         stagger: 0.125,
-//         duration: 1,
-//         scrollTrigger: {
-//           trigger: ref.current,
-//           start: "top 70%",
-//           end: "bottom 30%",
-//         },
-//       }
-//     );
-
-//     // Cleanup function
-//     return () => {
-//       ScrollTrigger.getAll().forEach((trigger) => {
-//         trigger.kill();
-//       });
-//       gsap.killTweensOf();
-//     };
-//   }, [ref, triggerOptions]);
-// };
-
 const AboutContent = forwardRef(
   (
     {
@@ -401,7 +340,7 @@ const About = () => {
         titleContent1="We are a passionate group of professionals dedicated to designing and constructing exquisite and sustainable environments Our team brings together extensive global expertise and collaborates with cutting-edge international partners to create luxurious properties that are built to withstand the test of time."
         titlePositionStyle="gap-[5vw] lg:right-28"
         titleDirectionStyle="-left-[15.75vw] lg:left-0"
-        image="/jpg/101.jpg"
+        image="/final-media/about/3.jpg"
         imageStyle="right-0 lg:-right-[1.0945vw]"
         extraContent1Style="hidden"
         extraContent1=""
@@ -414,7 +353,7 @@ const About = () => {
         titleContent1="By paying meticulous attention to every detail and utilizing high-quality finishes, we strive to establish a new benchmark for excellence in the Indian real estate market. Our unwavering commitment to perfection drives us to constantly surpass expectations and redefine the standards of quality."
         titlePositionStyle="gap-[7vw] flex-row-reverse "
         titleDirectionStyle="-right-[12.5vw] lg:right-0"
-        image="/jpg/102.jpg"
+        image="/final-media/about/4.jpg"
         imageStyle="left-0 lg:-left-[1.1vw]"
         extraContent1Style="block"
         extraContent1="We exclusively employ top-tier materials and collaborate with trusted suppliers to ensure that every aspect of our properties adheres to our rigorous standards. You can rest assured knowing that your home is constructed with the utmost commitment to excellence, ensuring superior quality."
@@ -438,44 +377,3 @@ const About = () => {
 };
 
 export default About;
-
-// const TextLineAnimation = ({ text, className }) => {
-//   const textRef = useRef(null);
-
-//   useLayoutEffect(() => {
-//     const splitDesc = new SplitType(
-//       textRef.current.querySelectorAll(".className"),
-//       {
-//         types: "lines",
-//       }
-//     );
-//     const tl = gsap.timeline();
-//     tl.fromTo(
-//       splitDesc.lines,
-//       { opacity: 0, y: 20 },
-//       {
-//         opacity: 1,
-//         y: 0,
-//         stagger: 0.1,
-//         duration: 1,
-//         scrollTrigger: {
-//           trigger: textRef.current,
-//           start: "top center",
-//           end: "bottom top",
-//           // scrub: true,
-//         },
-//       }
-//     );
-
-//     return () => {
-//       splitDesc.revert();
-//       tl.kill();
-//     };
-//   }, []);
-
-//   return (
-//     <div ref={textRef} className={`${className}`}>
-//       {text}
-//     </div>
-//   );
-// };

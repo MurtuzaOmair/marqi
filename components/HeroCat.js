@@ -1,8 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import localFont from "next/font/local";
 import Image from "next/image";
-import HeroRepertoire from "/public/jpg/10.jpg";
-import HeroRepertoire2 from "/public/categories/rertoire.jpg";
+import HeroRepertoire from "/public/final-media/repertoires/heroCat/1.jpg";
+import HeroRepertoire2 from "/public/final-media/repertoires/heroCat/2.jpg";
 import gsap from "gsap";
 import useParallax from "@/hooks/Parallax";
 import TypewriterGSAP from "./ReusableComponents/TypewriterGSAP";
@@ -12,11 +12,6 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 const calming = localFont({
   src: "../styles/calming/Calming-Regular.woff2",
   variable: "--font-calming",
-});
-
-const quentin = localFont({
-  src: "../styles/quentin/Quentin.woff2",
-  variable: "--font-quentin",
 });
 
 gsap.registerPlugin(ScrollTrigger);

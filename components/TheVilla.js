@@ -3,20 +3,17 @@ import { gsap } from "gsap";
 import Image from "next/image";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import localFont from "next/font/local";
-import Image1 from "/public/jpg/43.jpg";
-import Image2 from "/public/jpg/38.jpg";
-import Image3 from "/public/jpg/40.jpg";
-import Image4 from "/public/jpg/44.jpg";
-import Image5 from "/public/jpg/6.webp";
-import Image6 from "/public/jpg/46.jpg";
-import Image7 from "/public/jpg/43.jpg";
-import Image8 from "/public/webp/coral/23.webp";
-import Image9 from "/public/webp/coral/16.webp";
-import Image10 from "/public/webp/coral/11.webp";
-import Image11 from "/public/webp/coral/4.webp";
-import Image12 from "/public/webp/coral/12.webp";
-import Image13 from "/public/jpg/18.jpg";
-import Image14 from "/public/webp/coral/18.webp";
+import Image1 from "/public/final-media/coral-gables/theVilla/1.jpg";
+import Image2 from "/public/final-media/coral-gables/theVilla/2.jpg";
+import Image3 from "/public/final-media/coral-gables/theVilla/3.jpg";
+import Image5 from "/public/final-media/coral-gables/theVilla/4.webp";
+import Image6 from "/public/final-media/coral-gables/theVilla/5.jpg";
+import Image8 from "/public/final-media/coral-gables/theVilla/6.webp";
+import Image9 from "/public/final-media/coral-gables/theVilla/7.webp";
+import Image10 from "/public/final-media/coral-gables/theVilla/8.webp";
+import Image11 from "/public/final-media/coral-gables/theVilla/9.webp";
+import Image12 from "/public/final-media/coral-gables/theVilla/10.webp";
+
 import TypewriterGSAP from "./ReusableComponents/TypewriterGSAP";
 
 const reasonsToInvest = [

@@ -4,10 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import Image1 from "/public/webp/coral/111.webp";
-import Image2 from "/public/jpg/location.jpg";
-import Image3 from "/public/jpg/33.jpg";
-import Image4 from "/public/carol.jpg";
+import Image1 from "/public/final-media/coral-gables/location/1.webp";
+import Image2 from "/public/final-media/coral-gables/location/2.jpg";
+import Image3 from "/public/final-media/coral-gables/location/3.jpg";
+import Image4 from "/public/final-media/coral-gables/location/4.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
