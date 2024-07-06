@@ -21,7 +21,7 @@ const Line = ({ path, top, border }) => {
       {
         width: "100%",
 
-        duration: 1.25,
+        duration: 0.75,
         ease: "Expo.easeOut",
         delay: 0.005,
         scrollTrigger: {
@@ -39,9 +39,9 @@ const Line = ({ path, top, border }) => {
         y: 0,
         opacity: 1,
 
-        duration: 1.25,
+        duration: 0.75,
         ease: "Expo.easeOut",
-        stagger: 1,
+        stagger: 0.5,
         delay: 0.0005,
         scrollTrigger: {
           trigger: border.current,
@@ -56,7 +56,7 @@ const Line = ({ path, top, border }) => {
       {
         width: "100%",
 
-        duration: 1.25,
+        duration: 0.75,
         ease: "Expo.easeOut",
         delay: 0.0005,
         scrollTrigger: {
@@ -74,9 +74,9 @@ const Line = ({ path, top, border }) => {
         y: 0,
         opacity: 1,
 
-        duration: 1.25,
+        duration: 0.75,
         ease: "Expo.easeOut",
-        stagger: 1.25,
+        stagger: 0.5,
         delay: 0.0005,
         scrollTrigger: {
           trigger: border.current,
