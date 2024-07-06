@@ -65,7 +65,7 @@ const OurProjects = () => {
           <div className="border-r pr-5 border-[#51375b]"></div>
           <div className="lg:w-[45%] base:h-[20rem] lg:h-[30vw] flex items-center justify-center">
             <Image
-              src={"/webp/coral/2.webp"}
+              src={"/final-media/main/ourProjects/2.webp"}
               width={500}
               height={500}
               className="w-full object-cover opacity-100 h-full brightness-[.85]"
