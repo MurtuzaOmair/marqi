@@ -1,6 +1,6 @@
 const Vid = () => {
   return (
-    <div className="w-full h-screen flex items-center justify-center">
+    <div className="w-full h-[80vh] md:h-screen flex items-center justify-center">
       <video
         className="w-full h-full object-cover"
         autoPlay
