@@ -9,7 +9,7 @@ function useScrollbar() {
       clearTimeout(timer);
       timer = setTimeout(() => {
         document.body.classList.remove("on-scrollbar");
-      }, 1000);
+      }, 500);
     };
 
     window.addEventListener("scroll", handleScroll);

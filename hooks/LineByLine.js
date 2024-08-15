@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import SplitType from "split-type";
@@ -23,6 +23,7 @@ const useLineByLine = (ref, triggerOptions = {}) => {
           trigger: ref.current,
           start: "top 70%",
           end: "bottom 30%",
+          scrub: true,
         },
       }
     );

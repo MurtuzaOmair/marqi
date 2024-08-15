@@ -2,7 +2,7 @@
 import Head from "next/head";
 import localFont from "next/font/local";
 import { gsap } from "gsap";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -39,7 +39,7 @@ const contactItems = [
 ];
 
 const useGSAPAnimation = (ref, triggerOptions = {}) => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!ref.current) return;
 
     const tl = gsap.timeline({

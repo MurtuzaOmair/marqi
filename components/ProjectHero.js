@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import localFont from "next/font/local";
 import Image from "next/image";
 import HeroRepertoire from "/public/final-media/coral-gables/projectHero/1.jpg";
@@ -36,7 +36,7 @@ const ProjectHero = () => {
 
   const opacityRefs = useRef([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     opacityRefs.current = [title.current, image1.current, image2.current];
 
     opacityRefs.current.forEach((ref) => {

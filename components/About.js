@@ -1,10 +1,4 @@
-import {
-  useLayoutEffect,
-  useRef,
-  forwardRef,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useRef, forwardRef, useState } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
 import localFont from "next/font/local";
@@ -113,25 +107,25 @@ const FoundersSection = () => {
         className="relative w-full h-screen hidden lg:flex items-center justify-center bg-[#51375b]"
       >
         <div className="flex w-[80%] items-center justify-between relative">
-          <div className="w-[50%] flex-shrink-0 relative image-wrapper overflow-hidden">
+          <div className="w-[30%] rounded-full flex-shrink-0 relative image-wrapper overflow-hidden">
             <div className="absolute inset-0 z-20 reveal-mask bg-[#fcf3ff]"></div>
             <div className="relative inset-0 z-10">
               <Image
                 src={founders[currentFounder].image}
                 alt={founders[currentFounder].name}
-                className="founder-image h-[75vh] object-cover"
+                className="founder-image h-[50vh]   rounded-full border-[12.5px] border-[#FCF3FF] object-cover"
               />
             </div>
           </div>
           <div
-            className={`flex flex-col justify-center items-end h-[75vh] relative w-[50%] ${founders[currentFounder].gap} text-[#fcf3ff]`}
+            className={`flex flex-col justify-center items-end h-[60vh] relative w-[70%] ${founders[currentFounder].gap} text-[#fcf3ff]`}
           >
             <TypewriterGSAP
               mainClassName="relative w-fit z-10"
               className="founder-name text-[transparent] bg-clip-text bg-gradient-to-r from-[rgba(170,115,52,1)] via-[rgba(208,168,93,1)] to-[rgba(182,128,55,1)] font-medium md:min-w-[50vw] text-[12vw] md:text-[10vw] lg:text-[7.75vw] md:leading-[12vw] "
               text={founders[currentFounder].name}
             />
-            <p className="founder-description text-[0.9vw] text-start w-[70%]">
+            <p className="founder-description text-[0.9vw] text-start w-[85%]">
               {founders[currentFounder].description}
             </p>
           </div>
@@ -190,7 +184,7 @@ const calming = localFont({
 });
 
 const useGSAPAnimation = (ref, triggerOptions = {}) => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!ref.current) return;
 
     const textElements = Array.from(
