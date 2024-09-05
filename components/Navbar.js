@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import localFont from "next/font/local";
+import { Source_Sans_3 } from "next/font/google";
 import Image from "next/image";
 import logo from "/public/final-media/main/nav/marqi2.png";
 import { useRouter } from "next/router";
@@ -11,10 +12,7 @@ const metropolis = localFont({
   variable: "--font-metropolis",
 });
 
-const sourcesans = localFont({
-  src: "../styles/sourcesans/sourcesans.woff2",
-  variable: "--font-sourcesans",
-});
+const sourcesans = Source_Sans_3({ subsets: ["latin"] });
 
 // Navigation links
 const links = [
@@ -50,7 +48,7 @@ const links = [
   },
 ];
 
-const Nav = () => {
+const Navbar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [nav, setNav] = useState(false);
@@ -293,4 +291,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Navbar;

@@ -1,14 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import localFont from "next/font/local";
 import { gsap } from "gsap";
-import { useInView } from "react-intersection-observer";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
-
-const metropolis = localFont({
-  src: "../styles/metropolis/METROPOLIS.woff2",
-  variable: "--font-metropolis",
-});
 
 gsap.registerPlugin(ScrollTrigger);
 

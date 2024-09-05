@@ -7,11 +7,6 @@ const metropolis = localFont({
   variable: "--font-metropolis",
 });
 
-const calming = localFont({
-  src: "../styles/calming/Calming-Regular.woff2",
-  variable: "--font-calming",
-});
-
 const GetInTouch = () => {
   return (
     <div className=" w-full  flex flex-col items-center justify-center gap-7 py-16 md:py-24 border-t border-[#929197] uppercase  ">

@@ -1,5 +1,5 @@
 import Associations from "@/components/Associations";
-import Nav from "@/components/Nav";
+import Navbar from "@/components/Navbar";
 import React from "react";
 
 const associations = () => {
@@ -7,7 +7,7 @@ const associations = () => {
     <div
       className={`associations-page w-screen h-screen bg-[#51375B] overflow-hidden`}
     >
-      <Nav />
+      <Navbar />
       <Associations />
     </div>
   );

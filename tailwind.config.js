@@ -7,18 +7,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      images: {
-        domains: ["http://localhost:3000"], // Add your domain here
-      },
-      colors: {
-        "body-color": "#e2e8f0", // Define your custom body color
-      },
-      "savanna-bg": "url('/images/savanna-background.jpg')", // Update with actual image paths
-      "mountain-bg": "url('/images/mountain-background.jpg')",
-      "sea-bg": "url('/images/sea-background.jpg')",
-      "lake-bg": "url('/images/lake-background.jpg')",
-      "forest-bg": "url('/images/forest-background.jpg')",
-      "desert-bg": "url('/images/desert-background.jpg')",
       gridTemplateRows: {
         // Simple 36 row grid
         15: "repeat(15, minmax(0, 1fr))",

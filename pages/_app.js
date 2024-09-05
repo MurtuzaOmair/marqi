@@ -1,11 +1,7 @@
 import "@/styles/globals.css";
-import "../styles/golden/stylesheet.css";
-import "../styles/monteserrat/stylesheet.css";
-import SmoothScrolling, { PageProvider } from "@/context/pageContext";
-import Cursor from "@/components/Cursor";
-import { useEffect, useLayoutEffect } from "react";
+import SmoothScrolling from "@/context/pageContext";
+import { useEffect } from "react";
 import { loadIonicons } from "@/utils/LoadIonicons";
-// import Template from "@/context/template";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -13,11 +9,8 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    // <Template>
     <SmoothScrolling>
       <Component {...pageProps} />
-      {/* <Cursor /> */}
-      {/* </Template> */}
     </SmoothScrolling>
   );
 }

@@ -1,4 +1,4 @@
-const Vid = () => {
+const Video = () => {
   return (
     <div className="w-full h-[80vh] md:h-screen flex items-center justify-center">
       <video
@@ -15,4 +15,4 @@ const Vid = () => {
   );
 };
 
-export default Vid;
+export default Video;
