@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import OurProjects from "@/components/OurProjects";
 import Service from "@/components/Service";
 import Video from "@/components/Video";
-import useScrollbar from "@/hooks/scrollbar";
+// import useScrollbar from "@/hooks/scrollbar";
 import React from "react";
 
 export default function Home() {
