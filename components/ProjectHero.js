@@ -4,8 +4,8 @@ import Image from "next/image";
 import HeroRepertoire from "/public/final-media/coral-gables/projectHero/1.jpg";
 import HeroRepertoire2 from "/public/final-media/coral-gables/projectHero/2.webp";
 import gsap from "gsap";
-import useParallax from "@/hooks/Parallax";
-import useLineByLine from "@/hooks/LineByLine";
+import useParallax from "hooks/Parallax";
+import useLineByLine from "hooks/LineByLine";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 const calming = localFont({

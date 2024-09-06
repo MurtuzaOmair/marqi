@@ -1,5 +1,5 @@
-import Associations from "@/components/Associations";
-import Navbar from "@/components/Navbar";
+import Associations from "components/Associations";
+import Navbar from "components/Navbar";
 import React from "react";
 
 const associations = () => {

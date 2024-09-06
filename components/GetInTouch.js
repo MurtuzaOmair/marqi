@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import localFont from "next/font/local";
-import { gsap } from "gsap";
 
 const metropolis = localFont({
   src: "../styles/metropolis/METROPOLIS.woff2",

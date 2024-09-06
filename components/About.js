@@ -8,7 +8,8 @@ import dynamic from "next/dynamic";
 import { debounce } from "lodash";
 import founder1Image from "../public/final-media/about/1.jpg";
 import founder2Image from "../public/final-media/about/2.jpg";
-import useLineByLine from "@/hooks/LineByLine";
+import useLineByLine from "hooks/LineByLine";
+// import useLineByLine from "@/hooks/LineByLine";
 
 const TypewriterGSAP = dynamic(
   () => import("./ReusableComponents/TypewriterGSAP"),

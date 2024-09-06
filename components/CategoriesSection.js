@@ -14,8 +14,8 @@ import Tile from "/public/final-media/repertoires/categoriesSection/8.jpg";
 import Mosaic from "/public/final-media/repertoires/categoriesSection/9.jpg";
 import WoodenFlooring from "/public/final-media/repertoires/categoriesSection/10.jpg";
 import Wallpaper from "/public/final-media/repertoires/categoriesSection/11.jpg";
-import useParallax from "@/hooks/Parallax";
-import useLineByLine from "@/hooks/LineByLine";
+import useParallax from "hooks/Parallax";
+import useLineByLine from "hooks/LineByLine";
 
 gsap.registerPlugin(ScrollTrigger);
 
