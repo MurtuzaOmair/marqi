@@ -94,18 +94,18 @@ const Location = () => {
           <div className="grid grid-cols-12 grid-rows-6 gap-[1vw]">
             <LocationImage
               src={Image2}
-              className="w-full h-full col-start-1 col-span-6 row-start-1 row-span-2"
+              className="   sm:h-full col-start-1 col-span-6 row-start-1 row-span-2"
               alt="Location Image 2"
             />
             <LocationImage
               src={Image3}
-              className="w-full h-full col-start-7 col-span-6 row-start-1 row-span-2"
+              className="   sm:h-full col-start-7 col-span-6 row-start-1 row-span-2"
               alt="Location Image 3"
             />
             <Image
               src={Image4}
               alt="Location Image 4"
-              className="w-full h-full col-start-1 col-span-12 row-start-3 row-span-4  object-cover"
+              className="  sm:h-full col-start-1 col-span-12 row-start-3 row-span-4  object-cover"
             />
           </div>
         </div>
