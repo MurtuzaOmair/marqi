@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import localFont from "next/font/local";
 import Image from "next/image";
 import HeroRepertoire from "/public/final-media/coral-gables/projectHero/1.jpg";
@@ -39,9 +39,9 @@ const ProjectHero = () => {
   useEffect(() => {
     opacityRefs.current = [title.current, image1.current, image2.current];
 
-    opacityRefs.current.forEach((ref) => {
+    const animations = opacityRefs.current.map((ref) => {
       if (ref) {
-        gsap.fromTo(
+        return gsap.fromTo(
           ref,
           {
             y: 20,
@@ -59,72 +59,69 @@ const ProjectHero = () => {
           }
         );
       }
+      return null;
     });
 
-    // Cleanup function
     return () => {
-      opacityRefs.current.forEach((ref) => {
-        if (ref) {
-          // Kill the GSAP animations associated with the ref
-          gsap.killTweensOf(ref);
-          // Kill the ScrollTrigger instances associated with the ref
-          ScrollTrigger.getAll().forEach((trigger) => {
-            if (trigger.trigger === ref) {
-              trigger.kill();
-            }
-          });
-        }
-      });
+      animations.forEach((animation) => animation && animation.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
-  return (
-    <div className="  min-h-full w-full flex items-center justify-center flex-col ">
-      <div className=" parallax-plus h-[100vh] lg:h-[150vh] w-full grid justify-center items-center grid-cols-36 grid-rows-36 ">
-        <h1
-          ref={title}
-          className={`${quentin.className} col-start-4 ml-[1vw] md:ml-0 mb-[2vw] md:mb-0 md:col-start-7 lg:col-start-8 row-start-12 row-span-3 col-span-30 md:col-span-24 lg:col-span-22  text-[13.5vw] sm2:text-[11vw] lg:text-[10vw] leading-none z-[1] tracking-tight  text-[#46304f] `}
-        >
-          Coral Gables
-        </h1>
-
+  const memoizedImages = useMemo(
+    () => (
+      <>
         <Image
           ref={image1}
           src={HeroRepertoire}
           alt="Repertoire"
-          className=" parallax-minus brightness-110 row-start-13 row-span-23 lg:col-start-1 lg:row-start-13 lg:row-span-20 col-span-36 lg:col-span-36 col-start-1  object-cover h-full w-full z-0 "
+          className="parallax-minus brightness-110 row-start-13 row-span-23 lg:col-start-1 lg:row-start-13 lg:row-span-20 col-span-36 lg:col-span-36 col-start-1 object-cover h-full w-full z-0"
         />
-
         <Image
           ref={image2}
           src={HeroRepertoire2}
           alt="Repertoire"
-          className=" parallax-minus row-start-29 row-span-8 col-start-2 col-span-10  hidden lg:block  object-cover  w-full h-full "
+          className="parallax-minus row-start-29 row-span-8 col-start-2 col-span-10 hidden lg:block object-cover w-full h-full"
         />
-        {/* </div> */}
+      </>
+    ),
+    []
+  );
+
+  return (
+    <div className="min-h-full w-full flex items-center justify-center flex-col">
+      <div className="parallax-plus h-[100vh] lg:h-[150vh] w-full grid justify-center items-center grid-cols-36 grid-rows-36">
+        <h1
+          ref={title}
+          className={`${quentin.className} col-start-4 ml-[1vw] md:ml-0 mb-[2vw] md:mb-0 md:col-start-7 lg:col-start-8 row-start-12 row-span-3 col-span-30 md:col-span-24 lg:col-span-22 text-[13.5vw] sm2:text-[11vw] lg:text-[10vw] leading-none z-[1] tracking-tight text-[#46304f]`}
+        >
+          Coral Gables
+        </h1>
+
+        {memoizedImages}
       </div>
-      <div className=" h-full w-full flex items-end justify-center py-[3vw] lg:py-[4vw] ">
-        <div className=" w-[95%] sm2:w-[90%] lg:w-[85%] flex flex-col items-end justify-between gap-[4vw]">
+      <div className="h-full w-full flex items-end justify-center py-[3vw] lg:py-[4vw]">
+        <div className="w-[95%] sm2:w-[90%] lg:w-[85%] flex flex-col items-end justify-between gap-[4vw]">
           <h2
             ref={hero}
-            className={`flex flex-wrap  w-full text-[12.4vw] lg:text-[6vw] leading-[0.85] ${calming.className} uppercase text-[#51375b] z-[1]`}
+            className={`flex flex-wrap w-full text-[12.4vw] lg:text-[6vw] leading-[0.85] ${calming.className} uppercase text-[#51375b] z-[1]`}
           >
             Where nature meets opulence
           </h2>
 
-          <div className="  w-full h-full flex flex-col items-end justify-center text-left  gap-[2.5vw] lg:gap-[1.5vw] text-[2.8vw] lg:text-[1vw] font-medium text-[#51375bbd]  ">
-            <p ref={paragraph1} className=" w-full text-left ">
+          <div className="w-full h-full flex flex-col items-end justify-center text-left gap-[2.5vw] lg:gap-[1.5vw] text-[2.8vw] lg:text-[1vw] font-medium text-[#51375bbd]">
+            <p ref={paragraph1} className="w-full text-left">
               Our design process is a meticulous dance between dedication and
               expertise. Every detail, from the initial layout to the finishing
               flourish, receives our unwavering attention, ensuring an
               unparalleled level of craftsmanship.
-              <br />{" "}
-              <span className=" pt-[2vw] lg:pt-[1vw] ">
+              <br />
+              <span className="pt-[2vw] lg:pt-[1vw]">
                 Our villas transcend mere luxury; they represent a commitment to
-                environmental stewardship. We&apos;ve meticulously designed them
-                to minimize their impact, offering eco-conscious dream homes
-                that can be luxurious escapes or profitable investments, all
-                while delivering exceptional returns on more than just finances.
+                environmental stewardship. We've meticulously designed them to
+                minimize their impact, offering eco-conscious dream homes that
+                can be luxurious escapes or profitable investments, all while
+                delivering exceptional returns on more than just finances.
               </span>
             </p>
           </div>
@@ -134,4 +131,4 @@ const ProjectHero = () => {
   );
 };
 
-export default ProjectHero;
+export default React.memo(ProjectHero);
