@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import Link from "next/link";
 import localFont from "next/font/local";
 import { Source_Sans_3 } from "next/font/google";
@@ -16,36 +22,18 @@ const sourcesans = Source_Sans_3({ subsets: ["latin"] });
 
 // Navigation links
 const links = [
-  {
-    title: "main",
-    href: "/",
-  },
-  {
-    title: "about",
-    href: "/about",
-  },
+  { title: "main", href: "/" },
+  { title: "about", href: "/about" },
   {
     title: "projects",
     subLink: true,
     subTitle: [
-      {
-        title: "coral gables",
-        href: "/projects/coral-gables",
-      },
-      {
-        title: "associations",
-        href: "/projects/associations",
-      },
+      { title: "coral gables", href: "/projects/coral-gables" },
+      { title: "associations", href: "/projects/associations" },
     ],
   },
-  {
-    title: "repertoires",
-    href: "/repertoires",
-  },
-  {
-    title: "contact",
-    href: "/contact",
-  },
+  { title: "repertoires", href: "/repertoires" },
+  { title: "contact", href: "/contact" },
 ];
 
 const Navbar = () => {
@@ -58,66 +46,51 @@ const Navbar = () => {
   const desktopNav = useRef(null);
   const svg = useRef(null);
 
-  // Handle click outside submenu
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (submenuRef.current && !submenuRef.current.contains(event.target)) {
-        setOpen(true); // Corrected to close the submenu
-      }
-    };
+  const isSpecialRoute = useMemo(() => {
+    return (
+      router.asPath === "/" ||
+      router.asPath === "/contact" ||
+      router.asPath === "/projects/associations"
+    );
+  }, [router.asPath]);
 
+  const handleClickOutside = useCallback((event) => {
+    if (submenuRef.current && !submenuRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
-  // Toggle submenu
-  const handleClick = (event, link) => {
+  const handleClick = useCallback((event, link) => {
     if (link.subLink) {
       event.preventDefault();
       setOpen((prevOpen) => !prevOpen);
     }
-  };
+  }, []);
 
-  const handleSubLinkClick = () => {
-    setOpen(false); // Close submenu after clicking sublink
-  };
+  const handleSubLinkClick = useCallback((event, isMobile) => {
+    if (!isMobile) {
+      event.stopPropagation(); // Prevent the click from bubbling up to the parent link
+    } else {
+      setOpen(false); // Close the dropdown on mobile
+    }
+  }, []);
+  const toggleNav = useCallback(() => {
+    setNav((prevNav) => !prevNav);
+  }, []);
 
-  // Animate nav elements
   useEffect(() => {
     const loadGSAP = async () => {
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
 
       gsap.registerPlugin(ScrollTrigger);
-
-      if (nav) {
-        gsap.to(mobileNav.current, {
-          y: 0,
-          opacity: 1,
-          duration: 0.45,
-        });
-      } else {
-        gsap.to(mobileNav.current, {
-          y: "-100vh",
-          duration: 0.45,
-        });
-      }
-
-      gsap.set(".nav-bg", { backgroundColor: "#FCF3FF", opacity: 0 });
-      gsap.set(svg.current, { yPercent: -101 });
-      gsap.set(".hamburger-color-onAnimation", {
-        color: `${
-          nav
-            ? "#51375b"
-            : router.asPath === "/" ||
-              router.asPath === "/contact" ||
-              router.asPath === "/projects/associations"
-            ? "#fcf3ff"
-            : "#51375b"
-        }`,
-      });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -129,6 +102,18 @@ const Navbar = () => {
         },
       });
 
+      if (nav) {
+        gsap.to(mobileNav.current, { y: 0, opacity: 1, duration: 0.45 });
+      } else {
+        gsap.to(mobileNav.current, { y: "-100vh", duration: 0.45 });
+      }
+
+      gsap.set(".nav-bg", { backgroundColor: "#FCF3FF", opacity: 0 });
+      gsap.set(svg.current, { yPercent: -101 });
+      gsap.set(".hamburger-color-onAnimation", {
+        color: nav ? "#51375b" : isSpecialRoute ? "#fcf3ff" : "#51375b",
+      });
+
       tl.to(".nav-bg", { opacity: 1 })
         .to(".desktop-nav-text", { color: "#51375b" })
         .to(associate.current, { color: "#51375b" }, "<")
@@ -138,21 +123,81 @@ const Navbar = () => {
     };
 
     loadGSAP();
-  }, [nav, router.asPath]);
+  }, [nav, isSpecialRoute]);
+
+  const renderNavLinks = useCallback(
+    (mobile = false) => {
+      return links.map((link, index) => (
+        <div key={index} className={mobile ? "w-full" : "w-fit"}>
+          <div className="w-full text-left cursor-pointer leading-none">
+            <li
+              className={
+                mobile ? "w-full border-b border-[#51375b52] py-[3vw]" : ""
+              }
+            >
+              <Link
+                href={link.href || "/"}
+                className={`${
+                  mobile
+                    ? "text-[min(8vw,1.25rem)] w-full leading-loose flex items-center text-[#51375b]"
+                    : `text-[min(0.9375vw,1.125rem)] inline-block ${
+                        isSpecialRoute
+                          ? "text-[#fcf3ffb8] hover:text-[#fcf3ff]"
+                          : "text-[#51375b] hover:text-[#51375bae]"
+                      } desktop-nav-text`
+                } font-semibold transition-all duration-500 ease-out`}
+                onClick={(e) => handleClick(e, link)}
+              >
+                {link.title}
+              </Link>
+            </li>
+            {link.subLink && (mobile ? true : open) && (
+              <div ref={submenuRef}>
+                <div
+                  className={`${
+                    mobile
+                      ? "bg-[#fcf3ff] w-full p-2 pl-4 mt-2"
+                      : `${
+                          isSpecialRoute ? "bg-[#fcf3ff]" : "bg-[#d3c2dae7]"
+                        } p-3 absolute block mt-2`
+                  } transition-all duration-500 ease-out`}
+                >
+                  {link.subTitle.map((sublink, subIndex) => (
+                    <div key={subIndex}>
+                      <Link
+                        href={sublink.href || "/"}
+                        className={`${
+                          mobile
+                            ? "text-[min(5vw,1.05rem)] w-full leading-loose text-[#51375b80] hover:text-[#51375b]"
+                            : "text-sm font-semibold text-[#51375b80] leading-normal hover:text-[#51375b]"
+                        } transition-all duration-500 z-[4] ease-out`}
+                        onClick={(e) => handleSubLinkClick(e, mobile)}
+                      >
+                        {sublink.title}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      ));
+    },
+    [open, isSpecialRoute, handleClick, handleSubLinkClick]
+  );
 
   return (
     <nav className="w-full fixed top-0 left-0 z-[3]">
       <div className="relative w-full flex items-center justify-between font-medium bg-transparent">
         {/* Marqi Logo */}
-        <div className="pl-[1%] py-[2%] transition-all duration-500 z-[4] md:py-[0.5%] flex justify-center items-center gap-[0.8vw]">
+        <div className="pl-[1%] py-[2%]  transition-all duration-500 z-[4] md:py-[0.5%] flex justify-center items-center gap-[0.8vw]">
           <Link rel="preload" href="/" className="cursor-pointer">
             <Image
               src={logo}
               alt="Marqi Logo"
               priority
-              width={278} // Add appropriate width and height based on your image
-              height={256} // Add appropriate width and height based on your image
-              className="h-[7.25vw] sm2:h-[5vw] md:h-[3.35vw] w-full"
+              className="h-[7.25vw] sm2:h-[5vw] md:h-[3.35vw] w-fit"
             />
           </Link>
           <div className="duration-500 ease-out hidden md:flex flex-col item-center justify-center">
@@ -164,11 +209,7 @@ const Navbar = () => {
             <span
               ref={associate}
               className={`${sourcesans.className} sourcesans ${
-                router.asPath === "/" ||
-                router.asPath === "/contact" ||
-                router.asPath === "/projects/associations"
-                  ? "text-[#fcf3ff]"
-                  : "text-[#51375b]"
+                isSpecialRoute ? "text-[#fcf3ff]" : "text-[#51375b]"
               } font-semibold text-[1.75vw] md:text-[0.85vw] opacity-70 tracking-[1.05vw] md:tracking-[0.6vw] self-center mix-blend-difference`}
             >
               ASSOCIATES
@@ -178,60 +219,14 @@ const Navbar = () => {
         {/* Hamburger Menu */}
         <div
           className="pr-[0.75%] z-[4] text-[#51375b] md:hidden text-[8vw] flex justify-center items-center hover:cursor-pointer transition-all duration-500 ease-out hamburger-color-onAnimation"
-          onClick={() => setNav((prevNav) => !prevNav)}
+          onClick={toggleNav}
         >
           <ion-icon name={`${nav ? "close-sharp" : "menu-sharp"}`}></ion-icon>
         </div>
         {/* Desktop Navbar */}
         <div className="pr-[1%] relative md:flex hidden items-center">
           <ul ref={desktopNav} className="flex uppercase items-center gap-3">
-            {links.map((link, index) => (
-              <div key={index} className="w-fit">
-                <div className="w-full text-left cursor-pointer leading-none">
-                  <li>
-                    <Link
-                      className={`text-[min(0.9375vw,1.125rem)] inline-block ${
-                        router.asPath === "/" ||
-                        router.asPath === "/contact" ||
-                        router.asPath === "/projects/associations"
-                          ? "text-[#fcf3ffb8] hover:text-[#fcf3ff]"
-                          : "text-[#51375b] hover:text-[#51375bae]"
-                      } desktop-nav-text font-semibold transition-all duration-500 ease-out`}
-                      onClick={(e) => handleClick(e, link)}
-                      href={link.href || "/"} // Ensure href is always defined
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                  {link.subLink && open && (
-                    <div ref={submenuRef}>
-                      <div
-                        className={`${
-                          router.asPath === "/" ||
-                          router.asPath === "/contact" ||
-                          router.asPath === "/projects/associations"
-                            ? "bg-[#fcf3ff]"
-                            : "bg-[#d3c2dae7]"
-                        } p-3 absolute block mt-2 transition-all duration-500 ease-out`}
-                      >
-                        <div>
-                          {link.subTitle.map((mysublinks, subIndex) => (
-                            <div key={subIndex}>
-                              <Link
-                                href={mysublinks.href || "/"} // Ensure href is always defined
-                                className="text-sm font-semibold text-[#51375b80] leading-normal hover:text-[#51375b] transition-all duration-500 z-[4] ease-out"
-                              >
-                                {mysublinks.title}
-                              </Link>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+            {renderNavLinks()}
           </ul>
           <div className="text-[#51375b] text-[1.65vw] absolute right-6 lg:right-5 flex items-center justify-center overflow-hidden cursor-pointer">
             <div
@@ -250,40 +245,7 @@ const Navbar = () => {
             nav ? "block" : "hidden"
           }`}
         >
-          {links.map((link, index) => (
-            <div key={index} className="w-full">
-              <div className="w-full text-left cursor-pointer leading-none">
-                <li className="w-full border-b border-[#51375b52] py-[3vw]">
-                  <Link
-                    href={link.href || "/"} // Ensure href is always defined
-                    className="text-[min(8vw,1.25rem)] w-full leading-loose flex items-center text-[#51375b] font-semibold transition-all duration-300 ease-out"
-                    onClick={(e) => handleClick(e, link)}
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-                {link.subLink && open && (
-                  <div ref={submenuRef}>
-                    <div className="bg-[#fcf3ff] w-full p-2 pl-4 mt-2 transition-all duration-500 ease-out">
-                      {link.subTitle.map((mysublinks, subIndex) => (
-                        <li
-                          key={subIndex}
-                          className="text-[min(5vw,1.05rem)] w-full leading-loose text-[#51375b80] hover:text-[#51375b] font-semibold transition-all duration-300 ease-out"
-                        >
-                          <Link
-                            href={mysublinks.href || "/"} // Ensure href is always defined
-                            onClick={handleSubLinkClick}
-                          >
-                            {mysublinks.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+          {renderNavLinks(true)}
         </ul>
       </div>
       <div className="absolute z-[-1] w-full h-full top-0 left-0 nav-bg"></div>
@@ -291,4 +253,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);

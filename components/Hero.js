@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
@@ -7,33 +7,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const sectionRefs = useRef([]);
+  const [currentImage, setCurrentImage] = useState(0);
 
-  // Add as many sections as needed here
-  const section1Ref = useRef(null);
-  const section2Ref = useRef(null);
-  const section3Ref = useRef(null);
-  const section4Ref = useRef(null);
-  const section5Ref = useRef(null);
-  const section6Ref = useRef(null);
+  const images = [
+    "/final-media/main/hero/1.webp",
+    "/final-media/main/hero/2.webp",
+    "/final-media/main/hero/3.webp",
+    "/final-media/main/hero/4.webp",
+    "/final-media/main/hero/5.webp",
+    "/final-media/main/hero/6.webp",
+    "/final-media/main/hero/7.webp",
+    "/final-media/main/hero/8.webp",
+  ];
 
-  useEffect(() => {
-    sectionRefs.current = [
-      section1Ref.current,
-      section2Ref.current,
-      section3Ref.current,
-      section4Ref.current,
-      section5Ref.current,
-      section6Ref.current,
-    ];
-
+  const setupGSAP = useCallback(() => {
     sectionRefs.current.forEach((ref) => {
       if (ref) {
         gsap.fromTo(
           ref,
-          {
-            y: 20,
-            opacity: 0,
-          },
+          { y: 20, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -48,14 +40,20 @@ const Hero = () => {
         );
       }
     });
+  }, []);
 
-    // Cleanup function
+  useEffect(() => {
+    setupGSAP();
+
+    const interval = setInterval(() => {
+      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+    }, 5000);
+
     return () => {
+      clearInterval(interval);
       sectionRefs.current.forEach((ref) => {
         if (ref) {
-          // Kill the GSAP animations associated with the ref
           gsap.killTweensOf(ref);
-          // Kill the ScrollTrigger instances associated with the ref
           ScrollTrigger.getAll().forEach((trigger) => {
             if (trigger.trigger === ref) {
               trigger.kill();
@@ -64,99 +62,68 @@ const Hero = () => {
         }
       });
     };
-  }, []);
+  }, [setupGSAP, images.length]);
 
-  const images = [
-    "/final-media/main/hero/1.webp",
-    "/final-media/main/hero/2.webp",
-    "/final-media/main/hero/3.webp",
-    "/final-media/main/hero/4.webp",
-    "/final-media/main/hero/5.webp",
-    "/final-media/main/hero/6.webp",
-    "/final-media/main/hero/7.webp",
-    "/final-media/main/hero/8.webp",
-  ];
-
-  const [currentImage, setCurrentImage] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prevImage) =>
-        prevImage === images.length - 1 ? 0 : prevImage + 1
-      );
-    }, 5000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [images.length]);
+  const sectionClasses = "text-[#51375b] text-[8.5vw] font-normal uppercase";
 
   return (
-    <div className="w-full flex flex-col  justify-center my-[2.5%] ">
-      {/* Hero Caption */}
-      <div className=" flex items-center w-full leading-none px-[0.725%]">
+    <div className="w-full flex flex-col justify-center my-[2.5%]">
+      <div className="flex items-center w-full leading-none px-[0.725%]">
         <h1
-          ref={section1Ref}
-          className={` text-[12.5vw] lg:text-[9.85vw] mb-[1.5vw]  leading-none tracking-[-0.85vw] lg:text-justify text-center sm2:text-left text-[#51375be4] font-light `}
+          ref={(el) => (sectionRefs.current[0] = el)}
+          className="text-[12.5vw] lg:text-[9.85vw] mb-[1.5vw] leading-none tracking-[-0.85vw] lg:text-justify text-center sm2:text-left text-[#51375be4] font-light"
         >
           sleek{" "}
-          <span className=" tracking-[-0.775vw] text-[#51375b] font-normal uppercase">
+          <span className="tracking-[-0.775vw] text-[#51375b] font-normal uppercase">
             sophistication
           </span>
         </h1>
       </div>
-      {/* Hero Image */}
+
       <div className="h-[65vh] lg:h-screen relative">
         {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0  transition-opacity duration-1000 ease-in-out ${
+          <Image
+            key={image}
+            src={image}
+            alt={`Image ${index + 1}`}
+            className={`object-cover w-full h-full brightness-[0.85] absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               currentImage === index ? "opacity-100" : "opacity-0"
             }`}
-          >
-            <Image
-              src={image}
-              alt={`Image ${index + 1}`}
-              className="object-cover w-full h-full brightness-[0.85]"
-              fill={true}
-            />
-          </div>
+            fill={true}
+            priority={index === 0}
+          />
         ))}
       </div>
-      {/* SeamlessStyleUnmatchedFuctionalityExquisite */}
-      <div className="  grid w-full h-full leading-[0.7]  grid-cols-30 grid-rows-30  text-[#51375b] text-[8.5vw]  font-normal uppercase  my-[2.5vw] ">
+
+      <div className="grid w-full md:h-full gap-[1vw] md:gap-0 leading-[0.7] grid-cols-30 grid-rows-30 my-[2.5vw]">
         <div
-          ref={section2Ref}
-          className={`col-span-15 col-start-11 lowercase italic ml-[0.5vw] `}
+          ref={(el) => (sectionRefs.current[1] = el)}
+          className={`${sectionClasses} col-span-15 col-start-11 lowercase italic ml-[0.5vw]`}
         >
           seamless
         </div>
-
         <div
-          ref={section3Ref}
-          className={`  col-span-8 col-start-14 row-start-2  lowercase italic leading-[0.75] ml-[1.165vw]  `}
+          ref={(el) => (sectionRefs.current[2] = el)}
+          className={`${sectionClasses} col-span-8 col-start-14 row-start-2 lowercase italic leading-[0.75] ml-[1.165vw]`}
         >
           style
         </div>
-
         <div
-          ref={section4Ref}
-          className={` col-span-21  col-start-11 row-start-3  ml-[2.5vw] `}
+          ref={(el) => (sectionRefs.current[3] = el)}
+          className={`${sectionClasses} col-span-21 col-start-11 row-start-3 ml-[2.5vw]`}
         >
           unmatched
         </div>
-
         <div
-          ref={section5Ref}
-          className={` col-span-26  col-start-3 row-start-4 `}
+          ref={(el) => (sectionRefs.current[4] = el)}
+          className={`${sectionClasses} col-span-26 col-start-3 row-start-4`}
         >
           functionality
         </div>
-
         <div
-          ref={section6Ref}
+          ref={(el) => (sectionRefs.current[5] = el)}
           id="exquisite"
-          className=" col-span-17 col-start-18 row-start-5 "
+          className={`${sectionClasses} col-span-17 col-start-18 row-start-5`}
         >
           exquisite
         </div>
