@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
@@ -120,7 +120,6 @@ const SingleSection = React.memo(({ img, title, desc, index }) => {
         { height: "0" },
         {
           height: "21.25vw",
-
           duration: 2,
           ease: "Expo.easeOut",
         },
@@ -143,52 +142,49 @@ const SingleSection = React.memo(({ img, title, desc, index }) => {
     };
   }, [index]);
 
+  const isEven = index % 2 === 0;
+
   return (
     <div
       ref={parentRef}
       className={`w-[97%] lg:w-full flex ${
-        index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-      } flex-col justify-center items-center gap-[3vw] lg:gap-0 `}
+        isEven ? "lg:flex-row" : "lg:flex-row-reverse"
+      } flex-col justify-center items-center gap-[3vw] lg:gap-0`}
     >
-      {/* ImageContainer */}
       <div
         ref={imageParentRef}
-        className=" overflow-hidden flex items-center justify-center h-[40vw] sm2:h-[30vw] lg:h-[21.25vw] w-full lg:w-[60%]"
+        className="overflow-hidden flex items-center justify-center h-[40vw] sm2:h-[30vw] lg:h-[21.25vw] w-full lg:w-[60%]"
       >
         <Image
           ref={imageRef}
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover"
           src={img}
           alt={title}
         />
       </div>
-      {/* BorderContainer */}
-      <div className=" flex justify-center items-center h-full mx-[2.5vw]  ">
+      <div className="flex justify-center items-center h-full mx-[2.5vw]">
         <div
           ref={borderRightRef}
-          className="w-[1.75px]  hidden lg:block bg-[#51375bce]"
+          className="w-[1.75px] hidden lg:block bg-[#51375bce]"
         ></div>
       </div>
-      {/* TitleAndDescriptionContainer */}
       <div
         className={`flex flex-col ${
-          index % 2 === 0
-            ? "lg:items-end lg:pr-[2vw]"
-            : "lg:items-start lg:pl-[2vw]"
-        } items-center justify-center w-full lg:w-[35%] gap-[1.5vw] `}
+          isEven ? "lg:items-end lg:pr-[2vw]" : "lg:items-start lg:pl-[2vw]"
+        } items-center justify-center w-full lg:w-[35%] gap-[1.5vw]`}
       >
         <h2
           ref={titleRef}
-          className={` w-full ${
-            index % 2 === 0 ? "lg:text-right" : "lg:text-left"
-          } text-left  base:text-[4.25vw] sm2:text-[3.75vw] leading-none lg:text-[1.85vw] font-semibold text-[#51375b] `}
+          className={`w-full ${
+            isEven ? "lg:text-right" : "lg:text-left"
+          } text-left base:text-[4.25vw] sm2:text-[3.75vw] leading-none lg:text-[1.85vw] font-semibold text-[#51375b]`}
         >
           {title}
         </h2>
         <div
           ref={descriptionRef}
           className={`lg:text-[1.05vw] w-full text-[2.75vw] sm2:text-[2.25vw] text-[#51375bd9] font-normal lg:w-[80%] text-justify ${
-            index % 2 === 0 ? "lg:text-right" : "lg:text-left"
+            isEven ? "lg:text-right" : "lg:text-left"
           }`}
         >
           {desc}
@@ -201,13 +197,15 @@ const SingleSection = React.memo(({ img, title, desc, index }) => {
 SingleSection.displayName = "SingleSection";
 
 const CategoriesSection = () => {
+  const memoizedContent = useMemo(() => content, []);
+
   return (
-    <div className="w-full flex-col flex items-center justify-center gap-[5vw] sm2:gap-[3.75vw] lg:gap-[4vw]  my-[5vw] lg:my-[3.5vw] overflow-hidden">
-      {content.map((data, index) => (
+    <div className="w-full flex-col flex items-center justify-center gap-[5vw] sm2:gap-[3.75vw] lg:gap-[4vw] my-[5vw] lg:my-[3.5vw] overflow-hidden">
+      {memoizedContent.map((data, index) => (
         <SingleSection key={index} {...data} index={index} />
       ))}
     </div>
   );
 };
 
-export default CategoriesSection;
+export default React.memo(CategoriesSection);
