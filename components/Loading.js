@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { gsap } from "gsap";
 
-const Loading = ({ setIsLoading, loadComplete }) => {
+const Loading = ({ setIsLoading }) => {
   const [loadingPercent, setLoadingPercent] = useState(0);
 
   useEffect(() => {
@@ -13,13 +13,10 @@ const Loading = ({ setIsLoading, loadComplete }) => {
     tl.to(
       {},
       {
-        duration: loadComplete ? 0 : 4, // Finish quickly if the page has already loaded
+        duration: 2, // 2 seconds animation duration
         onUpdate: function () {
           const progress = Math.round(tl.progress() * 100);
           setLoadingPercent(progress);
-        },
-        onComplete: function () {
-          setLoadingPercent(100);
         },
       }
     );
@@ -27,7 +24,7 @@ const Loading = ({ setIsLoading, loadComplete }) => {
     return () => {
       tl.kill();
     };
-  }, [setIsLoading, loadComplete]);
+  }, [setIsLoading]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-[#fcf3ff]">

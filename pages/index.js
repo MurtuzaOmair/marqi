@@ -12,29 +12,21 @@ import Loading from "components/Loading";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [loadComplete, setLoadComplete] = useState(false); // To indicate when page has fully loaded
 
   useEffect(() => {
     const handlePageLoad = () => {
-      setLoadComplete(true);
-      setTimeout(() => setIsLoading(false), 500); // Add small delay to ensure 100% completion
+      setIsLoading(false);
     };
 
-    if (document.readyState === "complete") {
-      // If the page is already loaded
-      handlePageLoad();
-    } else {
-      // If the page is still loading
-      window.addEventListener("load", handlePageLoad);
-    }
+    // Listen for the page load event
+    window.addEventListener("load", handlePageLoad);
 
     return () => {
       window.removeEventListener("load", handlePageLoad);
     };
   }, []);
 
-  if (isLoading)
-    return <Loading setIsLoading={setIsLoading} loadComplete={loadComplete} />;
+  if (isLoading) return <Loading setIsLoading={setIsLoading} />;
 
   return (
     <div className=" overflow-clip ">
