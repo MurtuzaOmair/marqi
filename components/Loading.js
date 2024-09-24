@@ -13,7 +13,7 @@ const Loading = ({ setIsLoading }) => {
     tl.to(
       {},
       {
-        duration: 3, // 2 seconds animation duration
+        duration: 4.5, // 2 seconds animation duration
         onUpdate: function () {
           const progress = Math.round(tl.progress() * 100);
           setLoadingPercent(progress);
