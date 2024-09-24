@@ -14,16 +14,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handlePageLoad = () => {
-      setIsLoading(false);
-    };
-
-    // Listen for the page load event
-    window.addEventListener("load", handlePageLoad);
-
-    return () => {
-      window.removeEventListener("load", handlePageLoad);
-    };
+    const timer = setTimeout(() => setIsLoading(false), 3000); // Simulate loading time (3 seconds)
+    return () => clearTimeout(timer);
   }, []);
 
   if (isLoading) return <Loading setIsLoading={setIsLoading} />;
