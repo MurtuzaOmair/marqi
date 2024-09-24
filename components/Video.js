@@ -10,6 +10,7 @@ const Video = () => {
         loop
         playsInline
         preload="metadata"
+        rel="preload"
       >
         <source src="/final-media/main/video/heroVideo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
