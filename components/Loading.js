@@ -6,18 +6,17 @@ const Loading = ({ setIsLoading }) => {
   const [loadingPercent, setLoadingPercent] = useState(0);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      onComplete: () => setIsLoading(false),
-    });
+    const tl = gsap.timeline();
 
     tl.to(
       {},
       {
-        duration: 4.5, // 2 seconds animation duration
+        duration: 2, // 2 seconds animation duration
         onUpdate: function () {
           const progress = Math.round(tl.progress() * 100);
           setLoadingPercent(progress);
         },
+        onComplete: () => setIsLoading(false),
       }
     );
 
@@ -25,6 +24,25 @@ const Loading = ({ setIsLoading }) => {
       tl.kill();
     };
   }, [setIsLoading]);
+
+  //   useEffect(() => {
+  //     const tl = gsap.timeline();
+
+  //     tl.to(".loading-text", {
+  //       opacity: 1,
+  //       duration: 1,
+  //       ease: "power2.out",
+  //     }).to(".loading-text", {
+  //       opacity: 0,
+  //       duration: 1,
+  //       ease: "power2.in",
+  //       onComplete: () => setIsLoading(false),
+  //     });
+
+  //     return () => {
+  //       tl.kill();
+  //     };
+  //   }, [setIsLoading]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-[#fcf3ff]">
