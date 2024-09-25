@@ -11,16 +11,41 @@ import React, { useEffect, useState } from "react";
 import Loading from "components/Loading";
 
 export default function Home() {
+  const [loadedComponents, setLoadedComponents] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Simulate loading time, or you can check if data/components are fully loaded.
-    const timer = setTimeout(() => setIsLoading(false), 5000); // 3 seconds
+  const components = [
+    Navbar,
+    Video,
+    Service,
+    Hero,
+    AboutUs,
+    Gallery,
+    OurProjects,
+    GetInTouch,
+    Footer,
+  ];
 
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    const loadComponent = async (index) => {
+      if (index < components.length) {
+        // Simulate component loading
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        setLoadedComponents((prevLoaded) => prevLoaded + 1);
+        loadComponent(index + 1);
+      } else {
+        setIsLoading(false);
+      }
+    };
+
+    loadComponent(0);
   }, []);
 
-  if (isLoading) return <Loading setIsLoading={setIsLoading} />;
+  const loadingProgress = Math.round(
+    (loadedComponents / components.length) * 100
+  );
+
+  if (isLoading) return <Loading loadingProgress={loadingProgress} />;
 
   return (
     <div className=" overflow-clip ">
