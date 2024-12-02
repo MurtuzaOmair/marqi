@@ -38,7 +38,7 @@ function SmoothScrolling({ children }) {
       ref={lenisRef}
       autoRaf={false}
     >
-      {[1, 2, 3, 4].map((i) => (
+      {/* {[1, 2, 3, 4].map((i) => (
         <div
           key={i}
           id={`banner-${i}`}
@@ -46,7 +46,7 @@ function SmoothScrolling({ children }) {
             (i - 1) / 4
           } w-1/4`}
         />
-      ))}
+      ))} */}
       {children}
     </ReactLenis>
   );
