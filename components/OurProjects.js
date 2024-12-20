@@ -74,7 +74,7 @@ const OurProjects = () => {
         <ProjectDetails
           title="Coral Gables"
           description="Our concept of luxury goes beyond mere opulence and extravagance. We value creating exceptional environments that seamlessly combine serenity, practicality, and sustainability. Our commitment to design is evident in the intricate craftsmanship of our villas, each a testament to our passion."
-          learnMoreLink="/final-media/main/ourProjects/2.webp"
+          learnMoreLink="/projects/coral-gables"
           imageSrc="/final-media/main/ourProjects/2.webp"
         />
       </div>

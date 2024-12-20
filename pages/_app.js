@@ -4,6 +4,7 @@ import "../styles/monteserrat/stylesheet.css";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { loadIonicons } from "utils/LoadIonicons";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const SmoothScrolling = dynamic(() => import("context/pageContext"), {
   ssr: false,
