@@ -4,7 +4,7 @@ export default function Video() {
   return (
     <div className="w-full h-[80vh] md:h-screen flex items-center justify-center overflow-hidden">
       <video
-        src={"/final-media/main/video/heroVideo.mp4"}
+        src={"/final-media/main/video/fhd.mp4"}
         autoPlay
         muted
         loop
