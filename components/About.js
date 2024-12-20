@@ -180,7 +180,7 @@ const FoundersSection = React.memo(() => {
         className="relative w-full h-screen hidden lg:flex items-center justify-center bg-[#51375b]"
       >
         <div className="flex w-[80%] items-center justify-between relative">
-          <div className="w-[30%] rounded-full flex-shrink-0 relative image-wrapper overflow-hidden">
+          <div className="w-[28%] rounded-full flex-shrink-0 relative image-wrapper overflow-hidden">
             <div className="absolute inset-0 z-20 reveal-mask bg-[#fcf3ff]"></div>
             <div className="relative inset-0 z-10">
               <Image
